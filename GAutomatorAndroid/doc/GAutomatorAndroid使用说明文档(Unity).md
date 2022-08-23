@@ -1302,6 +1302,7 @@ def screen_shot_click(element, sleeptime=2):
     time.sleep(sleeptime)
 ```
 传入的element为空或者element的位置找不到，则自动跳过。
+
 ```python
 qq_button = engine.find_element("/BootObj/CUIManager/Form_Login/LoginContainer/pnlMobileLogin/btnGroup/btnQQ")
 screen_shot_click(qq_button, 6)
@@ -1314,6 +1315,7 @@ QQ或者微信登录，设计到Activity的切换和Android标准控件的操作
 
 <img src="image/login_step.png" alt="Drawing" width="600px" />
 对应的处理代码如下所示：
+
 ```python
 def login():
     # 步骤1，等待到达登录界面
@@ -1331,6 +1333,7 @@ def login():
     #步骤3，等待QQ登录界面退出，切换到游戏界面
     select_btn = find_element_wait("/BootObj/Panle/selectBtn")
 ```
+
 1. 步骤1：等待进入到登录选择scene，如何获取scene名称，请看[1.4 GAutomatorView](#1.4)。wait_for_scene("SceneName")，会一直查询，直到进入名称为"SceneName"的场景。进入到"SceneName"的场景后，查询QQ登录按钮直到出现(find_element_wait)，并点击QQ登录按钮。
 2. 步骤2：从游戏的Activity切换到QQ或者微信的登录界面需要一定的时间。`wait_for_package("com.tencent.mobileqq")`检查顶层包名，直到QQ的顶层包名(微信包名为com.tencent.mm)。`device.login_qq_wechat_wait(120)`会根据当前的顶层包名，自动选择QQ或者微信登录，当顶层包名不再是"com.tencent.mm"或"com.tencent.mobileqq"时推出。
 **注：账号由云端自动分配。本地调试时请修改wpyscripts/wetest/device.py下面`native_deivce.__init__(self)`中的账号密码**
@@ -1340,6 +1343,7 @@ def login():
 
 ## 8.4 战斗场景随机操作
 进入战斗场景后，我们通常可以在里面进行随机操作，直到比赛结束。scripts/testcase/tools.py里面封装了一个random_click(fun=None, forbid_elements=(),max_num=1000,sleep = 2)
+
 ```python
 def random_click(fun=None, forbid_elements=(),max_num=1000,sleep = 2):
     """
